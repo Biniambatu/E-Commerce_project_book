@@ -1,10 +1,15 @@
+import { Header,Footer } from "./assets/components"
+import { AllRoutes } from "./assets/routes/AllRoutes"
+
 
 
 function App() {
   
   return (
     <>
-      <h1>hello</h1>
+      <Header/>
+      <AllRoutes/>
+      <Footer/>
     </>
   )
 }
