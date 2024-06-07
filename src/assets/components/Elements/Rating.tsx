@@ -1,4 +1,6 @@
-
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import { IconButton } from '@mui/material';
 export const Rating = ({rating}) => {
     let ratingArray = Array(5).fill(false);
     for(let i=0; i<rating; i++){
@@ -9,9 +11,9 @@ export const Rating = ({rating}) => {
     <>
         { ratingArray.map((value, index) => (
             value ? (
-                <i key={index} className="text-lg bi bi-star-fill text-yellow-500 mr-1"></i>
+                <i key={index} ><IconButton sx={{ color: 'gold' }}><StarIcon /></IconButton></i>
             ) : (
-                <i key={index} className="text-lg bi bi-star text-yellow-500 mr-1"></i>
+                <i key={index}><IconButton sx={{ color: 'gold' }}><StarBorderIcon/></IconButton></i>
             )
         )) }
     </>
