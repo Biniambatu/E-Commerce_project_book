@@ -15,6 +15,7 @@ export const ProductList = () => {
     fetchProducts();
   },[])
   return (
+    
     <main>
     <section className="my-5">
       <div className="my-5 flex justify-between">
@@ -35,5 +36,7 @@ export const ProductList = () => {
     </section>
     {show && <FilterBar setShow={setShow} />}
 </main> 
+
+  
   )
 }
