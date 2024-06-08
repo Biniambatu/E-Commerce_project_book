@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CiSettings } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 import { RxAvatar } from "react-icons/rx";
 export const Header = () => {
+  const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false)
+  useEffect(()=>{
+    localStorage.setItem("darkMode",JSON.stringify(darkMode))
+    if(darkMode){
+      document.documentElement.classList.add('dark')
+    }else{
+      document.documentElement.classList.remove('dark')
+    }
+  },[darkMode])
   return (
     <header>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -24,7 +33,7 @@ export const Header = () => {
             </span>
           </Link>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <span className="cursor-pointer text-xl text-gray-700 dark:text-white">
+            <span onClick={()=>setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
               <CiSettings size="30px" />
             </span>
             <span className="cursor-pointer text-xl text-gray-700 dark:text-white">
