@@ -4,7 +4,9 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 import { RxAvatar } from "react-icons/rx";
+import { Search } from "../Sections/Search";
 export const Header = () => {
+  const [shows, setShows] = useState(false)
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false)
   useEffect(()=>{
     localStorage.setItem("darkMode",JSON.stringify(darkMode))
@@ -36,7 +38,7 @@ export const Header = () => {
             <span onClick={()=>setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
               <CiSettings size="30px" />
             </span>
-            <span className="cursor-pointer text-xl text-gray-700 dark:text-white">
+            <span onClick={()=>setShows(!shows)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
               <IoIosSearch size="30px" />
             </span>
             <Link to="/cart">
@@ -50,6 +52,8 @@ export const Header = () => {
           </div>
         </div>
       </nav>
+      <Search shows={shows}/>
     </header>
+    
   );
 };

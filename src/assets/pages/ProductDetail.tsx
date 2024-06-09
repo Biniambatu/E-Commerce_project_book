@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Rating } from '../components/Elements/Rating'
 import { useParams } from 'react-router-dom';
+import useTitle from '../hooks/useTitle';
 
 const ProductDetail = () => {
-     
+   
     const [product, setProduct] = useState({});
     const {id} = useParams()
-
+    useTitle(product.name)
     useEffect(()=>{
         async function fetchProduct() {
             const response = await fetch(`http://localhost:8000/products/${id}`);
