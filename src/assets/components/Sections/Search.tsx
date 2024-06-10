@@ -14,6 +14,7 @@ export const Search = ({shows}) => {
             </button>
         </form>
     </div>}
+    
     </>
   )
 }
