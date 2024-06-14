@@ -9,19 +9,19 @@ switch (type) {
     return { productList: payload.products }
 
   case "SORT_BY":
-    return
+    return {...state, sortBy :payload.sortBy}
 
   case "RATINGS":
-    return
+    return {...state, ratings: payload.ratings}
 
   case "BEST_SELLER_ONLY":
-    return
+    return {...state, bestSellerOnly: payload.bestSellerOnly}
 
   case "ONLY_IN_STOCK":
-    return
+    return {...state, onlyInStock: payload.onlyInStock}
 
   case "CLEAR_FILTER":
-    return
+    return 
 
   default:
      throw new Error("no case found")
