@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductCard } from '../../../components/Elements/ProductCard'
-import { Await } from 'react-router-dom'
+
 
 export const FeaturedProducts = () => {
   const [products, setProducts] = useState([])

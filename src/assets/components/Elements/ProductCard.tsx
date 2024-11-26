@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Link } from "react-router-dom";
 import { Rating } from "./Rating";
 import StarIcon from '@mui/icons-material/Star';

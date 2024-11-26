@@ -1,4 +1,4 @@
-import React from 'react'
+
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 export const Search = () => {
 

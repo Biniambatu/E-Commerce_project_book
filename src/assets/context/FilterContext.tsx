@@ -24,7 +24,7 @@ const filterInitialState = {
         }
     });
 }
-   const bestSeller = (products) => {
+   const bestSeller = (products:any) => {
         return state.bestSellerOnly ? products.filter(product => product.best_seller === true) : products 
    }
    const inStock = (products) => {

@@ -3,25 +3,26 @@ import { ProductCard } from '../../components/Elements/ProductCard'
 import {FilterBar} from '../Products/Components/FilterBar'
 import { useLocation } from 'react-router-dom'
 import useTitle from '../../hooks/useTitle'
-import { useFilter } from '../../context/FilterContext'
+// import { useFilter } from '../../context/FilterContext'
 
 export const ProductList = () => {
   useTitle("Explore eBooks Collaction")
-  const {products, initialProductList} = useFilter();
+  // const {products, initialProductList} = useFilter();
  
   const [show, setShow] = useState(false)
-  // const [products, setProducts] = useState([])
-  const Search = useLocation().search;
-  const searchTerm = new URLSearchParams(Search).get("q") 
+   const [products, setProducts] = useState([])
+  // const Search = useLocation().search;
+  // const searchTerm = new URLSearchParams(Search).get("q") 
 
-  useEffect(()=>{
-    async function fetchProducts() {
-      const response = await fetch(`http://localhost:8000/products?name_like=${searchTerm ? searchTerm : " "}`);
-      const data = await response.json()
-      initialProductList(data)
-    }
-    fetchProducts();
-  },[searchTerm])
+  useEffect(() => {
+     async function fetchProducts() {
+     const response = await fetch("http://localhost:8000/products");
+     const data = await response.json()
+     setProducts(data)
+     } 
+     fetchProducts()
+  },[])
+  
   return (
     
     <main>
@@ -36,10 +37,9 @@ export const ProductList = () => {
       </div>    
 
       <div className="flex flex-wrap justify-center lg:flex-row">
-        {products.map((product)=>(
-          <ProductCard key={product.id} product={product}/> 
-        ))}  
-           
+       {products.map((product) => (
+        <ProductCard key={product.id} product={product}  />
+       ))}
       </div>  
     </section>
     {show && <FilterBar setShow={setShow} />}
