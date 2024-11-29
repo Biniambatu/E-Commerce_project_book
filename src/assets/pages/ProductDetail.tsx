@@ -3,7 +3,7 @@ import { Rating } from '../components/Elements/Rating'
 import { useParams } from 'react-router-dom';
 import useTitle from '../hooks/useTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { add_to_cart } from '../../store/cartSlice';
+import { add_to_cart, remove_from_cart } from '../../store/cartSlice';
 
 const ProductDetail = () => {
     const cartList = useSelector(state => state.cartState.cartList)
@@ -11,6 +11,7 @@ const ProductDetail = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
     useTitle(product.name)
+    const [isInCart, setIsInCart] = useState(false)
     useEffect(()=>{
         async function fetchProduct() {
             const response = await fetch(`http://localhost:8000/products/${id}`);
@@ -19,12 +20,19 @@ const ProductDetail = () => {
         }
         fetchProduct()
     },[])
-
+    useEffect(() => {
+      const isProductInCart = cartList.find(item => item.id === id)
+      if(isProductInCart){
+          setIsInCart(true)
+      }else{
+          setIsInCart(false)
+      }
+    },[cartList,id])
   return (
     <main>
     <section> 
-      <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-gray-900 dark:text-slate-200">{cartList.name}</h1>
-      <p className="mb-5 text-lg text-center text-gray-900 dark:text-slate-200">{product.overview}</p>
+      <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-gray-900 dark:text-slate-200">{product.name}</h1>
+      {/* <p className="mb-5 text-lg text-center text-gray-900 dark:text-slate-200">{product.overview}</p> */}
       <div className="flex flex-wrap justify-around">
         <div className="max-w-xl my-3">
           <img className="rounded" src={product.poster} alt='product.name' />
@@ -49,7 +57,7 @@ const ProductDetail = () => {
                 <Rating rating={product.rating}/>
             </span> 
           </p>
-           <button className='inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800' onClick={() => dispatch(add_to_cart(cartList)) } >Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>  
+          {isInCart? (<button className='inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800' onClick={() => dispatch(remove_from_cart(product)) } > Remove <i className="ml-1 bi bi-plus-lg"></i></button>):(<button className='inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800' onClick={() => dispatch(add_to_cart(product)) } >Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>)}
           <p className="text-lg text-gray-900 dark:text-slate-200">
             {product.long_description}
           </p>

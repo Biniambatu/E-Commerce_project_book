@@ -16,7 +16,7 @@ export const ProductList = () => {
 
   useEffect(() => {
      async function fetchProducts() {
-     const response = await fetch("http://localhost:8000/products");
+     const response = await fetch("http://localhost:8000/products?name_like=javascript");
      const data = await response.json()
      setProducts(data)
      } 

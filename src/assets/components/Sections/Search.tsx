@@ -1,7 +1,9 @@
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { useLocation } from 'react-router-dom';
 export const Search = () => {
-
+  const search = useLocation()
+  console.log(search)
   return (
     <>
      <div className="mx-auto max-w-screen-xl p-2 my-5">

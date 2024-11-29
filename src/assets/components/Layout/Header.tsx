@@ -8,9 +8,12 @@ import { Search } from "../Sections/Search";
 import DropDownLoggedIn from "../Elements/DropDownLoggedIn";
 import DropDownLoggedOut from "../Elements/DropDownLoggedOut";
 export const Header = () => {
+  const [dropDown, setDropDown] = useState(false)
   const [searchSection, setSearchSection] = useState(false)
   const [avaterSection, setAvatarSection] = useState(false)
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false)
+  //const token = JSON.parse(sessionStorage.getItem("token"));
+  
   useEffect(()=>{
     localStorage.setItem("darkMode",JSON.stringify(darkMode))
     if(darkMode){
@@ -32,7 +35,6 @@ export const Header = () => {
               className="h-8"
               alt="Flowbite Logo"
             />
-
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Codebook
             </span>
@@ -50,11 +52,11 @@ export const Header = () => {
               </span>
             </Link>
             <span className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5">
-              <RxAvatar size="30px" onClick={()=>setAvatarSection(!avaterSection)}/>
+              <RxAvatar size="30px" onClick={()=> setAvatarSection(!avaterSection)}/>
                 {/* { avaterSection && <DropDownLoggedIn />} */}
                 { avaterSection && <DropDownLoggedOut />}
             </span>
-            
+            { dropDown && (token ? <DropDownLoggedIn setDropDown={setDropDown}/>: <DropDownLoggedOut setDropDown={setDropDown}/>) }
           </div>
         </div>
       </nav>
