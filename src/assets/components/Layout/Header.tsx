@@ -38,10 +38,10 @@ export const Header = () => {
             </span>
           </Link>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <span onClick={()=>setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
+            <span onClick={()=> setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
               <CiSettings size="30px" />
             </span>
-            <span onClick={()=>setSearchSection(!searchSection)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
+            <span onClick={()=> setSearchSection(!searchSection)} className="cursor-pointer text-xl text-gray-700 dark:text-white">
               <IoIosSearch size="30px" />
             </span>
             <Link to="/cart">

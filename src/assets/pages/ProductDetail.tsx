@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Rating } from '../components/Elements/Rating'
 import { useParams } from 'react-router-dom';
 import useTitle from '../hooks/useTitle';
+import { useDispatch, useSelector } from 'react-redux';
+import { add_to_cart } from '../../store/cartSlice';
 
 const ProductDetail = () => {
-   
+    const cartList = useSelector(state => state.cartState.cartList)
     const [product, setProduct] = useState({});
+    const dispatch = useDispatch()
     const {id} = useParams()
     useTitle(product.name)
     useEffect(()=>{
@@ -20,7 +23,7 @@ const ProductDetail = () => {
   return (
     <main>
     <section> 
-      <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-gray-900 dark:text-slate-200">{product.name}</h1>
+      <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-gray-900 dark:text-slate-200">{cartList.name}</h1>
       <p className="mb-5 text-lg text-center text-gray-900 dark:text-slate-200">{product.overview}</p>
       <div className="flex flex-wrap justify-around">
         <div className="max-w-xl my-3">
@@ -38,7 +41,7 @@ const ProductDetail = () => {
           </p>
           <p className="my-4 select-none">
             {product.best_seller? (<span className="font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2">BEST SELLER</span>):(<span ></span>)  } 
-            {product.in_stock? (<span className="font-semibold text-emerald-600	border bg-slate-100 rounded-lg px-3 py-1 mr-2">INSTOCK</span> ):(<span className="font-semibold text-rose-700 border bg-slate-100 rounded-lg px-3 py-1 mr-2">OUT OF STOCK</span>) }
+            {product.in_stock? (<span className="font-semibold text-emerald-600	border bg-slate-100 rounded-lg px-3 py-1 mr-2">IN STOCK</span> ):(<span className="font-semibold text-rose-700 border bg-slate-100 rounded-lg px-3 py-1 mr-2">OUT OF STOCK</span>) }
             <span className="font-semibold text-blue-500 border bg-slate-100 rounded-lg px-3 py-1 mr-2">{product.size} MB</span>
           </p>
           <p className="my-3">
@@ -46,7 +49,7 @@ const ProductDetail = () => {
                 <Rating rating={product.rating}/>
             </span> 
           </p>
-           <button className='inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800' >Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>  
+           <button className='inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800' onClick={() => dispatch(add_to_cart(cartList)) } >Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>  
           <p className="text-lg text-gray-900 dark:text-slate-200">
             {product.long_description}
           </p>

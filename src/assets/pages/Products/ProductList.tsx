@@ -44,7 +44,5 @@ export const ProductList = () => {
     </section>
     {show && <FilterBar setShow={setShow} />}
 </main> 
-
-  
   )
 }
