@@ -14,7 +14,7 @@ const ProductDetail = () => {
     const [isInCart, setIsInCart] = useState(false)
     useEffect(()=>{
         async function fetchProduct() {
-            const response = await fetch(`http://localhost:8000/products/${id}`);
+            const response = await fetch(`http://localhost:3000/products/${id}`);
             const data = await response.json();
             setProduct(data)
         }
