@@ -7,13 +7,14 @@ import { RxAvatar } from "react-icons/rx";
 import { Search } from "../Sections/Search";
 import DropDownLoggedIn from "../Elements/DropDownLoggedIn";
 import DropDownLoggedOut from "../Elements/DropDownLoggedOut";
+import { useSelector } from "react-redux";
 export const Header = () => {
   const [dropDown, setDropDown] = useState(false)
   const [searchSection, setSearchSection] = useState(false)
   const [avaterSection, setAvatarSection] = useState(false)
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false)
   //const token = JSON.parse(sessionStorage.getItem("token"));
-  
+  const cartList = useSelector(state => state.cartState.cartList)
   useEffect(()=>{
     localStorage.setItem("darkMode",JSON.stringify(darkMode))
     if(darkMode){
@@ -48,7 +49,10 @@ export const Header = () => {
             </span>
             <Link to="/cart">
               <span className="cursor-pointer text-xl text-gray-700 dark:text-white">
-                <BsCart2 size="30px" />
+              <BsCart2 size="30px" className="relative" />
+                <span className="absolute -top-0 2-right-0 bg-rose-500 text-white text-xs px-1 rounded-full">
+                  {cartList.length}
+                </span>
               </span>
             </Link>
             <span className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5">
